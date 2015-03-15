@@ -103,11 +103,10 @@ row_num <- which.max(numstepsperintervalforeachday_avgdacrossalldates$steps)
 #This is the time interval at which the max steps on average occur
 row_num
 #Use that to get the time (hrs) at which this occurs from the 'interval' column
-numstepsperintervalforeachday_avgdacrossalldates[row_num, "interval"]
-#On average maximum steps occur at the 104th five minute interval on any given day. Which commences at 8:35 hrs and ends at 8:40 hrs
+print(numstepsperintervalforeachday_avgdacrossalldates[row_num, "interval"])
 ```
 
-
+On average maximum steps occur at the 104th five minute interval on any given day. Which commences at 8:35 hrs and ends at 8:40 hrs
 
 ## Imputing missing values
 

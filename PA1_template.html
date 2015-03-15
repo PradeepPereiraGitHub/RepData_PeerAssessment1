@@ -138,9 +138,9 @@ row_num &lt;- which.max(numstepsperintervalforeachday_avgdacrossalldates$steps)
 row_num</code></pre>
 <pre><code>## [1] 104</code></pre>
 <pre class="r"><code>#Use that to get the time (hrs) at which this occurs from the 'interval' column
-numstepsperintervalforeachday_avgdacrossalldates[row_num, &quot;interval&quot;]</code></pre>
+print(numstepsperintervalforeachday_avgdacrossalldates[row_num, &quot;interval&quot;])</code></pre>
 <pre><code>## [1] 835</code></pre>
-<pre class="r"><code>#On average maximum steps occur at the 104th five minute interval on any given day. Which commences at 8:35 hrs and ends at 8:40 hrs</code></pre>
+<p>On average maximum steps occur at the 104th five minute interval on any given day. Which commences at 8:35 hrs and ends at 8:40 hrs</p>
 </div>
 <div id="imputing-missing-values" class="section level2">
 <h2>Imputing missing values</h2>

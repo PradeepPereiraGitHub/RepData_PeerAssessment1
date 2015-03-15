@@ -21,6 +21,12 @@ Check the column value types
 ```{r, echo=T}
 str(activity_csv)
 ```
+<pre><code>
+## 'data.frame':    17568 obs. of  3 variables:
+##  $ steps   : int  NA NA NA NA NA NA NA NA NA NA ...
+##  $ date    : Factor w/ 61 levels &quot;2012-10-01&quot;,&quot;2012-10-02&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ interval: int  0 5 10 15 20 25 30 35 40 45 ...
+</code></pre>
 
 Convert column 'date' to type date
 
@@ -42,7 +48,17 @@ Use the 'aggregate' function to get a table of steps taken, summed up for each d
 sum_steps_per_day_foreach_date <- aggregate(steps ~ date, activity_csv, sum, na.action = na.omit)
 head(sum_steps_per_day_foreach_date,10)
 ```
-
+##          date steps
+## 1  2012-10-02   126
+## 2  2012-10-03 11352
+## 3  2012-10-04 12116
+## 4  2012-10-05 13294
+## 5  2012-10-06 15420
+## 6  2012-10-07 11015
+## 7  2012-10-09 12811
+## 8  2012-10-10  9900
+## 9  2012-10-11 10304
+## 10 2012-10-12 17382
 
 2. Make a histogram of the total number of steps taken each day
 
@@ -62,13 +78,13 @@ dev.off()
 #Calculating mean of total number of steps taken per day for each date
 mean(sum_steps_per_day_foreach_date$steps)
 ```
-
+## [1] 10766.19
 
 ```{r, echo=T}
 #Calculating median of total number of steps taken per day for each date
 median(sum_steps_per_day_foreach_date$steps)
 ```
-
+## [1] 10765
 
 ## What is the average daily activity pattern?
 
@@ -76,7 +92,19 @@ Create a table listing the number of steps by each time interval (of five minute
 
 ```{r, echo=T}
 numstepsperintervalforeachday_avgdacrossalldates <- aggregate(steps ~ interval, activity_csv, mean, na.action = na.omit)
+head(numstepsperintervalforeachday_avgdacrossalldates,10)
 ```
+##    interval     steps
+## 1         0 1.7169811
+## 2         5 0.3396226
+## 3        10 0.1320755
+## 4        15 0.1509434
+## 5        20 0.0754717
+## 6        25 2.0943396
+## 7        30 0.5283019
+## 8        35 0.8679245
+## 9        40 0.0000000
+## 10       45 1.4716981
 
 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 
@@ -105,6 +133,8 @@ row_num
 max_steps_time_interval <- numstepsperintervalforeachday_avgdacrossalldates[row_num, "interval"]
 max_steps_time_interval
 ```
+## [1] 104
+## [1] 835
 
 On average maximum steps occur at the 104th five minute interval on any given day. Which commences at 8:35 hrs and ends at 8:40 hrs
 
@@ -115,7 +145,7 @@ On average maximum steps occur at the 104th five minute interval on any given da
 ```{r, echo=T}
 sum(is.na(activity_csv))
 ```
-
+## [1] 2304
 
 
 2. Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
@@ -149,7 +179,7 @@ for (rnum in 1:nrow(activity_csv)) {
 # Verify that the new data set has no NA values at all
 sum(is.na(activity_csv_NA_replaced))
 ```
-
+## [1] 0
 
 4. Make a histogram of the total number of steps taken each day and Calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
@@ -174,17 +204,27 @@ mean(sum_steps_per_day_foreach_date$steps)
 mean(sum_steps_per_day_foreach_date_NA_replaced$steps)
 
 ```
+## [1] 10766.19
 
+```{r, echo=T}
+#Value with NA's replaced by average
+mean(sum_steps_per_day_foreach_date_NA_replaced$steps)
+```
+## [1] 10766.19
 
 ```{r, echo=T}
 #Calculating median of total number of steps taken per day for each date
 
 #Value with NA's omitted
 median(sum_steps_per_day_foreach_date$steps)
+```
+## [1] 10765
 
+```{r,echo=TRUE}
 #Value with NA's replaced by average
 median(sum_steps_per_day_foreach_date_NA_replaced$steps)
 ```
+## [1] 10766.19
 
 The values for mean are the same but differ for median, and marginally so. Hence the impact of imputing values is observed to be negligible.
 
@@ -206,15 +246,24 @@ deep<-transform(deep,day_type=ifelse(day_type=="Monday"|day_type=="Tuesday"|day_
 
 avg_steps_bytimeinterval_weekdays_weekends_forall_dates <- aggregate(steps ~ interval + day_type, deep, mean)
 head(avg_steps_bytimeinterval_weekdays_weekends_forall_dates)
+```
+##   interval day_type      steps
+## 1        0  Weekday 2.25115304
+## 2        5  Weekday 0.44528302
+## 3       10  Weekday 0.17316562
+## 4       15  Weekday 0.19790356
+## 5       20  Weekday 0.09895178
+## 6       25  Weekday 1.59035639
 
+```{r,echo=TRUE}
 library(lattice)
 png(file = "timeseries_weekday_weekend.png")
 xyplot(steps ~ interval | day_type, avg_steps_bytimeinterval_weekdays_weekends_forall_dates, layout = c(1, 2),
        col = "maroon", xlab = "Time interval (spanning 0:00 to 24:00 Hrs)", ylab = "Average number of steps", 
        type = "l", lwd = 2)
 dev.off()
-```
 
+```
 ![Embed time series plot for weekdays and weekends image here](instructions_fig/timeseries_weekday_weekend.png)
 
 From the above plots we can observe a difference in activity across weekdays and weekends across the dates activity was measured. 

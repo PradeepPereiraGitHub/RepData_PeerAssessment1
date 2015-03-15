@@ -138,7 +138,8 @@ row_num &lt;- which.max(numstepsperintervalforeachday_avgdacrossalldates$steps)
 row_num</code></pre>
 <pre><code>## [1] 104</code></pre>
 <pre class="r"><code>#Use that to get the time (hrs) at which this occurs from the 'interval' column
-print(numstepsperintervalforeachday_avgdacrossalldates[row_num, &quot;interval&quot;])</code></pre>
+max_steps_time_interval &lt;- numstepsperintervalforeachday_avgdacrossalldates[row_num, &quot;interval&quot;]
+max_steps_time_interval</code></pre>
 <pre><code>## [1] 835</code></pre>
 <p>On average maximum steps occur at the 104th five minute interval on any given day. Which commences at 8:35 hrs and ends at 8:40 hrs</p>
 </div>

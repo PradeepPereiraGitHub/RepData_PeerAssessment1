@@ -54,7 +54,7 @@ hist(sum_steps_per_day_foreach_date$steps,col="yellow", breaks=50,main="Total Nu
 dev.off()
 ```
 
-![Embed histogram image here](histsteps.png) 
+![Embed histogram image here](instructions_fig/histsteps.png) 
 
 
 3. Calculate and report the mean and median of the total number of steps taken per day
@@ -92,7 +92,7 @@ legend("topright", box.lty=0,inset=0.01, pch = "-", col=c("red","black","black")
 dev.off()
 ```
 
-![Embed time series plot 1 image here](timeseries1.png) 
+![Embed time series plot 1 image here](instructions_fig/timeseries1.png) 
 
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
@@ -163,7 +163,7 @@ hist(sum_steps_per_day_foreach_date_NA_replaced$steps,col="green", breaks=50,mai
 dev.off()
 ```
 
-![Embed histogram image here](histsteps_NoNA.png)
+![Embed histogram image here](instructions_fig/histsteps_NoNA.png)
 
 ```{r, echo=T}
 #Calculating mean of total number of steps taken per day for each date
@@ -216,7 +216,7 @@ xyplot(steps ~ interval | day_type, avg_steps_bytimeinterval_weekdays_weekends_f
 dev.off()
 ```
 
-![Embed time series plot for weekdays and weekends image here](timeseries_weekday_weekend.png)
+![Embed time series plot for weekdays and weekends image here](instructions_fig/timeseries_weekday_weekend.png)
 
 From the above plots we can observe a difference in activity across weekdays and weekends across the dates activity was measured. 
 
